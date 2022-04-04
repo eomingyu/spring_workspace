@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!-- BuyController, BuyService, BuyDao 빈(객체) 생성을 위한 설정 파일입니다. -->
+<!-- id는 변수명 역할의 식별자, class는 객체를 생성할 클래스(패키지명 반드시 표기) -->
+	
+	<bean class="day1.review.BuyController" id="controller">
+		<!-- 의존관계 주입 : 생성자에 전달하는 인자가 service 이름의 bean -->
+		<constructor-arg ref="service"/>
+	</bean>
+	
+	<bean class="day1.review.BuyService" id="service">
+		<!-- 의존관계 주입 : 생성자에 전달하는 인자가 dao 이름의 bean -->
+		<constructor-arg ref="dao"/>
+	</bean>
+	
+	<bean class="day1.review.BuyDao" id="dao">
+		<!-- 생성자의 인자 전달 -->
+		<constructor-arg value="마이바티스"/>
+	</bean>
+</beans>
