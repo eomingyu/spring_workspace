@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!-- day2 예제 xml : bean 설정 -->
+	<bean class="day2.review.MemberController" id="memberController">
+		<constructor-arg ref="myService"/>
+	</bean><!-- myService, yourService 빈 주입에 대해 각각 객체 생성 순서가 다릅니다. -->
+
+	<!-- bean 정의는 클래스에 대해서만 합니다. -->
+	<bean class="day2.review.MyMemberServiceImpl" id="myService">
+		<constructor-arg ref="mybatisDao"/>
+	</bean><!-- 커스텀 생성자로 빈을 생성합니다.-->
+	<bean class="day2.review.YourMemberServiceImpl" id="yourService">
+		<property name="dao" ref="jdbcDao"></property>
+	</bean><!-- 기본 생성자로 빈을 생성합니다. -->
+	<bean class="day2.review.MybatisMemberDao" id="mybatisDao">
+	</bean>
+	<bean class="day2.review.JdbcMemberDao" id="jdbcDao">
+	</bean>	
+</beans>

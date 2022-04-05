@@ -7,6 +7,8 @@ public class Main {
 		BuyDao dao = new BuyDao("Mybatis");
 		BuyService service = new BuyService(dao);		 //의존관계 주입
 		BuyController shop = new BuyController(service); //의존관계 주입
+		
+		//위와 같이 객체를 생성하고 의존관계를 설정하는 것을 객체들의 강한 결합이라고 합니다.
 		shop.buy();
 		
 		//애플리케이션 실행은 여러 환경에서 실행하게 됩니다. 
