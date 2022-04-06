@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="day3.mapper.MemberTblMapper">
+	<!-- mybatis-spring에서는 namespace 속성이 필수입니다. mapper 패키지이름.클래스명으로 설정합니다.
+	-->
+	<!-- 파라미터 타입이 클래스일 때  #{ }는 프로퍼티 이름을 정확히 대소문자 구분하여 작성하세요. -->
+	<insert id="insert" parameterType="Member">
+	INSERT INTO MEMBER_TBL_02
+	(custno,custname,phone,address,joindate,grade,city) 
+	VALUES (#{custNo}, #{custName}, #{phone}, #{address},sysdate, #{grade}, #{city})
+	</insert>
+	
+	<update id="update" parameterType="Member">
+	update member_tbl_02 
+	set phone= #{phone},address= #{address},city= #{city} 
+	where custno= #{custNo}
+	</update>
+	
+<!-- select 실행 결과를 자동으로 Member 객체를 생성해서 매핑을 합니다. -->
+	<select id="selectOne" parameterType="int" resultType="Member">
+	select * from member_tbl_02 where custno= #{custNo}
+	</select>
+<!-- select 실행결과가 여러 행이 되는 List 인 경우에는 <T>에 해당하는 제너릭 타입을 설정합니다. -->	
+	<select id="selectAll" resultType="Member">
+	select * from member_tbl_02
+	</select>
+	<!-- 동적쿼리 검색 -->
+	<select id="search" parameterType="java.util.Map" resultType="Member">
+	select * from member_tbl_02
+	<if test="column=='name'">
+		where custname like '%'||#{find}||'%'
+	</if>
+	<if test="column=='address'">
+		where address like '%'||#{find}||'%'
+	</if>
+	<if test="column=='grade'">
+		where grade=#{find}
+	</if>
+	<if test="column=='city'">
+		where city=#{find}
+	</if>
+	</select>
+	
+	<!-- 테스트 검색 -->
+	<select id="searchName" parameterType="String" resultType="Member">
+	select * from member_tbl_02 where custname like '%'||#{find}||'%'
+	</select>
+	<select id="getNextSeq" resultType="int">
+	select member_seq.nextval from dual
+	</select>
+
+	
+	
+	
+</mapper>

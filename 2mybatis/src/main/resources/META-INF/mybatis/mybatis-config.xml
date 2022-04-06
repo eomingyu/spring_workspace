@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- mybatis가 데이터베이스에 연결하기 위한 설정(config)파일
+https://mybatis.org/mybatis-3/ko/getting-started.html 참고
+ -->
+<configuration>
+ 	<typeAliases> <!-- 패키지명.클래스명 대신에 사용할 별칭을 짧게 지정합니다.-->
+ 		<typeAlias type="day3.dto.Member" alias="Member"/>
+ 		<typeAlias type="day3.dto.Money" alias="Money"/>
+ 	</typeAliases>
+</configuration>
+
+
