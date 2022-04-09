@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="day4.mapper.BookMapper">
+
+	<!-- insert sql 작성하세요 -->
+	<insert id="insert" parameterType="Book">
+		INSERT INTO TBL_BOOK (bcode,title,WRITER,PUBLISHER,PDATE)
+		values (#{bcode},#{title},#{writer},#{publisher},sysdate)
+	</insert>
+</mapper>

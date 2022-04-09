@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="day4.mapper.BookRentMapper">
+	<insert id="insert" parameterType="BookRent"
+	useGeneratedKeys="true" keyColumn="rent_no" keyProperty="rent_no">
+	<!-- insert 후에 시퀀스로 만들어진 rent_no 의 값을 dto 객체의 rent_no 프로퍼티에 저장합니다.
+		파라미터로 전달된 dto의 rent_no값은 설정이 0, insert 후에는 rent_no 컬럼 값이
+		dto의 rent_no 프로퍼티로 전달됩니다.
+	-->
+		insert into tbl_bookrent (rent_no,mem_idx,bcode,rent_date)
+		values(bookrent_seq.nextval,#{mem_idx},#{bcode},sysdate)
+	</insert>
+	<update id="updateExpDate" parameterType="int">
+		update tbl_bookrent set exp_date=rent_date+14
+		where rent_no = #{rent_no}
+	</update>
+</mapper>

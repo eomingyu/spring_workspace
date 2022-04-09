@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="day4.mapper.MemberMapper">
+	<insert id="insert" parameterType="Member">
+	insert into tbl_member(mem_idx,name,email,tel,password)
+	values(memidx_seq.nextval,#{name},#{email},#{tel},#{password})
+	</insert>
+</mapper>
