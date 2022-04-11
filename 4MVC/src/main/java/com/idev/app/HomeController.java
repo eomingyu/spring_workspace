@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -92,4 +93,46 @@ public class HomeController {
 		logger.info("[My]"+param);
 		return "redirect:/";	//url이 context로 새로운 요청으로 응답
 	}
+
+// 여기까지는 view > controller 메소드 또는 요청 파라미터 > controller	메소드
+	
+	
+//0411	
+// 여기부터는 controller > view(또는 새로운 요청의 파라미터)로 데이터 전달
+	
+	@RequestMapping(value="model")
+	public void model(Model model) {
+		model.addAttribute("idx", 23);
+		model.addAttribute("page", 11);
+	}	//view는 자동으로 model.jsp -> 이 요청에 대한 request, response를 jsp로 전달
+	
+	@RequestMapping(value="redirect")
+	public String redirect(Model model) {
+		model.addAttribute("idx", 99);
+		return "redirect:/";
+		//return "redirect:/?idx=99";와 동일한 실행 결과
+		//결론 : model은 redirect에서는 get 요청 파라미터 값		모델 객체로 파라미터 값 전달
+		//실행했을 때 url을 확인합시다.
+	}
+	
+	@RequestMapping(value="modelAttr")
+	public void modelAttr(@ModelAttribute(value="idx") int idx) {
+		//@ModelAttribute(value="idx") idx 변수 값은 Model 객체처럼 view에 전달됩니다.
+		//return "modelAttr";
+		
+		//결론 : http://localhost:8085/app/modelAttr?idx=101
+		//idx는 파라마터 이면서 modelAttr.jsp로 전달하는 model 객체
+	}
+	
+	@RequestMapping(value="orderAttr")
+	public String orderAttr(@ModelAttribute(value="order") Order order) {
+		
+		
+		return "modelAttr";
+	}
+	@RequestMapping(value="orderForm2")
+	public void orderForm2() {
+		
+	}
+	
 }
