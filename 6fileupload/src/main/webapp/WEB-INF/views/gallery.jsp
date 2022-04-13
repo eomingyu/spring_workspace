@@ -36,8 +36,10 @@ div{
  -->
  <c:forEach items="${list }" var="vo"><!-- 업로드한 3개의 파일명을 리스트로 애트리뷰트에서 가져오기 -->
  	<div>
- 		<img src="/upload/${vo}" width="400px" height="400px">
+ 		<img src="/upload/${vo}" width="400px" height="400px"
+ 		style="object-fit:cover">
  	</div>
  </c:forEach>
+
 </body>
 </html>
