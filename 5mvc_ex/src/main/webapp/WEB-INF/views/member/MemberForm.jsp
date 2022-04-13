@@ -72,6 +72,7 @@
 <div style="width: 70%; margin: auto;">
 		<h3>회원 등록</h3>
 		<!-- 다른 방법 : onsubmit 은 입력값 유효성 검증을 위한 것이다.submit 전에 실행된다. -->
+		<!-- 이 파일의 현재 경로(./)는 http://localhost:8085/idev/member -->
 		<form name="frmUser" method="post" action="./join.do">
 			<table style="width: 100%">
 				<tr>

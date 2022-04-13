@@ -8,7 +8,17 @@
 	INSERT INTO SCHEDULE(idx,mno,title,sdate)
 	VALUES(sch_idx_seq.nextval,#{mno},#{title},TO_DATE(#{sdate},'YYYY-MM-DD HH24:MI'))
 	</insert>
-	<select id="getSchedules" resultType="Schedule">
+	<select id="getSchedules" resultType="Schedule" parameterType="int">
 	SELECT * FROM SCHEDULE WHERE mno=#{mno} ORDER BY SDATE
 	</select>
+	<select id="checkMno" resultType="int" parameterType="int">
+	SELECT NVL(mno,0) FROM SCHEDULE WHERE idx=#{idx}
+	<!-- mno가 null일 때는 0으로 대체합니다. -->
+	</select>	<!-- 삭제하려는 idx가 로그인한 idx가 맞는지 확인하기 -->
+	
+	<delete id="delete">
+		delete from schedule where idx=#{idx}
+	</delete>
+	
+	
 </mapper>

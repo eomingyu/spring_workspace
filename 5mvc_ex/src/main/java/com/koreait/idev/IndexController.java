@@ -5,6 +5,9 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.koreait.idev.mapper.MemberMapper;
@@ -82,10 +86,23 @@ public class IndexController {
 	}
 	
 	@GetMapping("/logout.do")
-	public String logout() {
+	public String logout(SessionStatus status) {	//현재 세션 상태 객체
+		status.setComplete();	//@SessionAttributes 로 설정된 애트리뷰트 값을 clear 한다.
+		return "redirect:/";	//@SessionAttributes 면 얘로 지우기
+	}
+	@GetMapping("/logout")
+	public String logout2(HttpServletRequest request) {	//현재 세션 상태 객체
+		HttpSession session = request.getSession();	
+		session.invalidate();				//request로 session을 만들었으면 얘로 지우기
+		//서버가 JSESSIONID는 새로 부여해 주지만 @SessionAttributes로 설정된 값은 남아있다.
 		return "redirect:/";
 	}
-	
+	//@SessionAttributes로 설정된것은 SessionStatus 로 지운다.	
+	//status.setComplete();   
+	//- JSESSIONID 는 변하지 않고 @SessionAttributes 로 설정된 애트리뷰트 값을 clear 한다.
+//	- HttpSession의 removeAttribute() 메소드 동작과 유사
+//jsp에서 로그아웃 : session.invalidate(); //JSESSIONID값을 새로운 값으로 합니다.
+//	session.removeAttribute("member"); //JSESSIONID는 변하지 않고 값 삭제
 	
 	
 }

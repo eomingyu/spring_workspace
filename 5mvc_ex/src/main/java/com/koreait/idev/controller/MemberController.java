@@ -1,6 +1,10 @@
 package com.koreait.idev.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,8 +21,8 @@ import com.koreait.idev.mapper.MemberMapper;
 import com.koreait.idev.model.Member;
 
 @Controller
-@SessionAttributes("member")
 @RequestMapping(value = "member/")
+@SessionAttributes("member")
 public class MemberController {
 private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
@@ -47,32 +51,32 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 	}
 	
 	@GetMapping("/update.do")
-	public String update() {
+	public String update(@SessionAttribute Member member) {
 		return "member/MemberUpdateForm";
 	}
 	
 	@PostMapping("/save.do")
-	public String save(Member member, Model model) {
+	public void save(Member member, Model model, HttpServletResponse response) throws IOException {
 		logger.info("[My]"+member);
 		mapper.updateMember(member);
-		//model.addAttribute("member",member);
-		return "redirect:update.do";
+		model.addAttribute("member",member);
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		String url="./update.do"; String message="회원정보 수정되었습니다.";
+		out.print("<script>alert('" +message +"');location.href='"+url+"'");
+		out.print("</script>");
+		//return "redirect:update.do";
 	}
 	
 	@GetMapping("/idCheck.do")
 	public String idCheck(String email, Model model) {
 		String msg;
-		int check = mapper.checkEmail(email);
-		if(check==0) {
-			msg = "사용할수 있는 이메일(아이디)입니다.";
-			model.addAttribute("msg",msg);
-		}else {
-			msg = "사용할수 없는 이메일(아이디)입니다.";
-			model.addAttribute("msg",msg);
-		}
+		if(mapper.checkEmail(email)==0) 
+			msg = "사용할수 있는 이메일입니다.";
+		else 
+			msg = "사용할수 없는 이메일입니다.";
 		model.addAttribute("email",email);
-		
-		
+		model.addAttribute("msg",msg);
 		return "member/idCheck";
 	}
 }
