@@ -10,7 +10,8 @@
 	</insert>
 	<!-- 글 수정하기 -->
 	<update id="update" parameterType="Freeboard">
-	UPDATE freeboard SET content=#{content},wdate=sysdate WHERE idx=#{idx}
+	UPDATE freeboard SET content=#{content},subject=CONCAT('(수정)',subject ),
+	wdate=sysdate WHERE idx=#{idx}
 	</update>
 	<!-- 글 상세보기 -->
 	<select id="getOne" parameterType="int" resultType="Freeboard">
@@ -29,6 +30,8 @@
 	<select id="getCount" resultType="int">
 	SELECT count(*) FROM freeboard
 	</select>
-	
+	<delete id="delete" parameterType="int">
+	DELETE FROM freeboard WHERE idx=#{idx}
+	</delete>
 	
 </mapper>

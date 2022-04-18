@@ -7,6 +7,7 @@
 	<typeAliases>
 		<typeAlias type="com.mycompany.idev.dto.Member" alias="Member"/>
 		<typeAlias type="com.mycompany.idev.dto.Freeboard" alias="Freeboard"/>
+		<typeAlias type="com.mycompany.idev.dto.Comments" alias="Comments"/>
 		<typeAlias type="java.util.Map" alias="Map"/>
 	</typeAliases>
 
