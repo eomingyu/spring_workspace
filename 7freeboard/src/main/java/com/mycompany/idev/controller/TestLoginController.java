@@ -14,7 +14,7 @@ import com.mycompany.idev.dto.Member;
 
 
 @Controller
-//@SessionAttributes({"user","admin"})	//다른 컨트롤러 jsp에서 사용할 때 
+//@SessionAttributes({"user","admin"})	//다른 컨트롤러 jsp에서 사용할 때 //model.atrribute로 세션에 사용할 때
 public class TestLoginController {
 	private static final Logger logger = LoggerFactory.getLogger(TestLoginController.class);
 	
@@ -22,7 +22,7 @@ public class TestLoginController {
 	@RequestMapping("login")
 		public String login(HttpServletRequest request) {
 			HttpSession session = request.getSession();
-			session.setAttribute("user", new Member(0, "모모", null, "momo@naver.com"));
+			session.setAttribute("member", new Member(0, "모모", null, "momo@naver.com"));
 			
 			return "redirect:/";
 	}

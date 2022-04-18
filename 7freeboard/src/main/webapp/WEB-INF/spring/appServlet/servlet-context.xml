@@ -23,6 +23,28 @@
 	
 	<context:component-scan base-package="com.mycompany.idev" />
 	
-	
+	<!-- 인터셉터 구현체를 빈으로 등록 -->
+	<beans:bean id="testInterceptor"
+		class="com.mycompany.idev.interceptor.TestInterceptor"/>
+	<beans:bean id="loginInterceptor" 
+		class="com.mycompany.idev.interceptor.LoginInterceptor"/>
+	<!-- 인터셉터의 동작 범위를 설정 -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/**/**"/>	
+			<!-- 적용될 url(경로), 2단계 하위 디렉토리로 설정, *기호 모든 이름에 대해-->
+			<beans:ref bean="testInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/community/*"/>	
+			<mapping path="/member/*"/>	
+			<!-- 매핑에 제외할 url 설정 (로그인 안해도 볼 수 있는 페이지)-->
+			<exclude-mapping path="/member/join.do"/>
+			<exclude-mapping path="/community/list"/>
+			<exclude-mapping path="/community/detail"/>
+			<beans:ref bean="loginInterceptor"/>
+		</interceptor>
+	</interceptors>
+
 	
 </beans:beans>

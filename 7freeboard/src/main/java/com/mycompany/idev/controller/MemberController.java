@@ -21,8 +21,8 @@ import com.mycompany.idev.mapper.MemberMapper;
 import com.mycompany.idev.dto.Member;
 
 @Controller
-@RequestMapping(value = "member/")
-@SessionAttributes("member")
+@RequestMapping(value = "/member")
+//@SessionAttributes("member")
 public class MemberController {
 private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
@@ -51,7 +51,7 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 	}
 	
 	@GetMapping("/update.do")
-	public String update(@SessionAttribute Member member) {
+	public String update(@SessionAttribute("member") Member member) {
 		return "member/MemberUpdateForm";
 	}
 	

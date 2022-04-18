@@ -8,6 +8,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>우리동네 커뮤니티</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/freeboard.css">
+<script type="text/javascript">
+	if(${message != null}) alert('${message}');
+</script>
 </head>
 <body>
 <h3>우리동네 커뮤니티</h3>

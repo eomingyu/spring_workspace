@@ -3,5 +3,15 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.koreait.idev.mapper.GalleryMapper">
+	<select id="selectAll" resultType="Gallery">
+		select * from gallery order by pno desc
+	</select>
+	<insert id="insert" parameterType="Gallery">
+		insert into gallery(pno,title,filenames,wdate)
+		 values(pno_seq.nextval,#{title},#{filenames},sysdate)
+	</insert>
+
+
 
 </mapper>
+
