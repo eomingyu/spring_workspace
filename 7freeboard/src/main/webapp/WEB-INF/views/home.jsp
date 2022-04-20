@@ -13,6 +13,7 @@
 
 <P>  The time on the server is ${serverTime}. </P>
 <hr>
+<a href="memberForm">REST 서비스 테스트</a>
 <a href="community/list">우리동네 커뮤니티</a>
 <h3>일반 사용자 : 고객님.</h3>
 <c:if test="${member!=null}"><!-- 로그인 했을 때 메뉴 -->

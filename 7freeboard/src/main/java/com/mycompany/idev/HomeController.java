@@ -35,5 +35,8 @@ public class HomeController {
 		
 		return "home";
 	}
-	
+	@RequestMapping(value="memberFrom")
+	public void rest() {
+		
+	}
 }
