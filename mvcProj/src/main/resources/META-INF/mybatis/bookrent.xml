@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.idev.bookrent.mapper.BookrentMapper"> 
+ <select id="selectBooks"  resultType="BookDto">
+ SELECT * FROM TBL_BOOK
+ </select>
+ 
+ <select id="countByBcode" resultType="int" parameterType="String">
+ select count(*) from TBL_BOOK where bcode = #{bcode}
+ </select>
+ 
+ <insert id="insertRent" parameterType="BookRentDto">
+ INSERT INTO TBL_BOOKRENT (rent_no,MEM_IDX,BCODE,RENT_DATE,EXP_DATE)
+	values(bookrent_seq.nextval,#{mem_idx},#{bcode},#{rent_date},#{exp_date})
+ </insert>
+ <update id="updateDelays">
+  <![CDATA[
+  UPDATE TBL_BOOKRENT SET DELAY_DAYS = sysdate - EXP_DATE 
+  WHERE EXP_DATE < sysdate AND RETURN_DATE is null
+  ]]>
+ </update>
+ 
+ <select id="getRentList" resultType="BookRentDto">
+ 	SELECT * FROM TBL_BOOKRENT tb 
+ </select>
+</mapper>
+
+
+
+
+
+
+
+

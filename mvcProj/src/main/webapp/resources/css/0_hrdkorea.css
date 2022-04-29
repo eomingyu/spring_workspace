@@ -1,0 +1,106 @@
+html,body{
+    /* padding:0px;
+    margin-top:-20px;
+    margin-left: 0px; */
+    width: 100%;
+    height: 100%;
+}
+
+.header-item{
+    background-color: chocolate;
+    box-sizing: border-box;   
+    /* width,height 계산할 때 padding,border-width 포함시킵니다. */
+    height: 10rem;  /* 5rem의 내용물의 height와 padding,테두리굵기 포함. */
+    padding-top: 4rem;  
+    /* em: 상위태그의 크기에 대한 상대비율 ,rem : root html 에 대한 상대크기 
+       em은 부모태그 상태에 따라 달라지는 값, rem 은 항상 html태그 기준이므로 상대적인 비율 계산이 단순
+       1rem 은 html 태그의 기본 글꼴 크기(px),브라우저마다 차이가 있는데 대략 16~17px
+    */
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.wrap_container {
+    display: flex;
+    flex-direction: column;       
+    height: 100%;    /* html,body, section의 height 도 100%로 하세요. */
+}
+.container{
+    background-color: #37966f;  /* 16진수값 Red 2자리 , Green 2자리 , Blue 2자리 */
+    color: wheat;
+    width: 100%;
+    padding: 12px 8px;
+    top:0;
+    display: flex;
+    /* flex-direction: row; */
+    justify-content: left;
+    margin-top: 0;
+    margin-left: -10px;
+}
+
+.container > li {  /* .container 클래스 요소의 자식태그 li */
+    list-style: none;
+  /*   padding: 8px 18px; */
+    margin: 8px 12px;
+    font-size: 1.2em;
+}
+
+header{
+    /* position: fixed; */
+    left:0;
+    top:0; 
+    margin-top: -20px;
+    z-index: 10;
+    margin-left: -10px;
+}
+section {
+    /* height: 33rem; */
+    height: 100%;
+}
+ footer {
+     text-align: center;
+     background-color: cadetblue;
+     color: white;
+     padding: 20px;
+     margin-left: -10px;
+ }
+
+a{
+    text-decoration: none;
+    color: white;
+    font-size: 0.8em;
+}
+.container > li:hover {
+    background-color: #b9e4c9;
+    border-radius: 4px;
+}
+
+td,th{
+    border: 1px dotted gray;
+}
+td.col1_title {
+    text-align: center;
+    font-weight: bold;
+    width: 40%;
+    padding: 7px;
+}
+input[type=text],input[type=date]{
+    padding: 5px;
+    margin-left: 10px;
+}
+input[type=button]{
+    width: 70px;
+    
+}
+button {
+    padding: 5px 15px;
+    margin: 5px;
+}
+@media screen and (max-width:768px) {
+    .container{
+        flex-direction: column;
+    }
+    .container >li {
+        text-align: center;
+    }
+}
